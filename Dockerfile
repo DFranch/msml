@@ -1,4 +1,4 @@
-FROM composer:1.9.3 AS build-env
+FROM composer:1.10.6 AS build-env
 
 RUN composer global require humbug/box:^3.5 --prefer-dist --update-no-dev
 
@@ -9,7 +9,7 @@ WORKDIR /opt/msml
 RUN composer install --prefer-dist --no-dev
 RUN /tmp/vendor/bin/box build -v --no-interaction
 
-FROM php:7.4.2-alpine
+FROM php:7.4.6-alpine
 
 COPY --from=build-env /opt/msml/msml.phar /opt/msml/msml.phar
 
